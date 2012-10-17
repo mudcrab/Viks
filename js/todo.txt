@@ -1,0 +1,10 @@
+* Entity extends Sprite +
+* Get tile properties +
+* Click handler for any object
+* Multiple layers (canvas)
+* Tilemap class
+* Tilemap from TileD (extends Tilemap)
+* Viewport + camera +
+* UI layer
+* add default properties to entities +
+* asset loader
