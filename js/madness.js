@@ -26,14 +26,18 @@ var Madness = Class.create({
             left: Math.floor(jQuery(window).width() * 0.1),
             right: Math.floor(jQuery(window).width() * 0.9)
         };
-        for(var i = 0; i < 10; i++)
+        var pos = 0;
+        for(var x = 0; x < 100; x++)
         {
-            for(var j = 0; j < 10; j++)
+            for(var y = 0; y < 60; y++)
             {
-                this.stage.addChild(new PistonEntity(i * 32, j * 32, 32, 32, 'player', 'player character ' + Math.floor(Math.random() * 100)));
+                this.stage.addChild(new PistonEntity(x * 32, y * 32, 32, 32, 'grass1', 'grass' + pos));
+                pos++;
             }
         }
         this.player = new PistonEntity(300, 300, 32, 32, 'player', 'player character');
+        this.player.properties.xspeed = 3;
+        this.player.properties.yspeed = 3;
         this.player.scrollable = false;
         this.player.clickable = true;
         this.stage.addChild(this.player);
@@ -41,7 +45,21 @@ var Madness = Class.create({
     },
     update : function()
     {
+        if(fps < 30)
+        {
+            jQuery('#fps').css('color', '#f55b5b');
+        }
+        else if(fps < 45)
+        {
+            jQuery('#fps').css('color', '#f9ee2a');
+        }
+        else
+        {
+            jQuery('#fps').css('color', '#fff');
+        }
         jQuery('#fps').html(engine.fps());
+        jQuery('#totalent').html(this.stage.totalEntities);
+        jQuery('#drawnent').html(this.stage.drawnEntities);
         var leftClick = this.input.leftMouseClick();
         if(leftClick.clicked)
         {
@@ -54,8 +72,24 @@ var Madness = Class.create({
                     clicker.visible = false;
                 else
                     clicker.visible = true;*/
-                
+
             }
+        }
+        if(this.input.keyDown('w'))
+        {
+            this.player.move(0, -this.player.properties.yspeed);
+        }
+        if(this.input.keyDown('s'))
+        {
+            this.player.move(0, this.player.properties.yspeed);
+        }
+        if(this.input.keyDown('a'))
+        {
+            this.player.move(-this.player.properties.xspeed, 0);
+        }
+        if(this.input.keyDown('d'))
+        {
+            this.player.move(this.player.properties.xspeed, 0);
         }
     },
     draw: function()
