@@ -97,4 +97,4 @@ var Madness = Class.create({
         ///99221312*44001*pileti id
     }
 });
-var engine = new PistonEngine('gameDisplay', jQuery(window).width(), jQuery(window).height(), Madness, 'c2d', 8);
+var engine = new PistonEngine('gameDisplay', jQuery(window).width(), jQuery(window).height(), Madness, 'fallback', 1000 / 60);
