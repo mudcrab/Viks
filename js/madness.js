@@ -19,17 +19,11 @@ var Madness = Class.create({
     setup: function(stage)
     {
         this.stage = stage;
-        this.stage.setSize(10 * 32, 10 * 32, 32, 32);
-        this.stage.boundingBox = {
-            top: Math.floor(jQuery(window).height() * 0.1),
-            bottom: Math.floor(jQuery(window).height() * 0.9),
-            left: Math.floor(jQuery(window).width() * 0.1),
-            right: Math.floor(jQuery(window).width() * 0.9)
-        };
+        this.stage.setSize(jQuery(window).width(), jQuery(window).height(), 32, 32, jQuery(window).width(), jQuery(window).height());
         var pos = 0;
-        for(var x = 0; x < 100; x++)
+        for(var x = 0; x < Math.floor(jQuery(window).width() / 32) + 1; x++)
         {
-            for(var y = 0; y < 60; y++)
+            for(var y = 0; y < Math.floor(jQuery(window).height() / 32) + 1; y++)
             {
                 this.stage.addChild(new PistonEntity(x * 32, y * 32, 32, 32, 'grass1', 'grass' + pos));
                 pos++;
@@ -94,7 +88,7 @@ var Madness = Class.create({
     },
     draw: function()
     {
-        ///99221312*44001*pileti id
+        
     }
 });
-var engine = new PistonEngine('gameDisplay', jQuery(window).width(), jQuery(window).height(), Madness, 'fallback', 1000 / 60);
+var engine = new PistonEngine('gameDisplay', jQuery(window).width(), jQuery(window).height(), Madness, 'c2d', 8);
