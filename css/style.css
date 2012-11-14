@@ -78,6 +78,10 @@ td { vertical-align: top; }
 /* ===== Primary Styles ========================================================
    Author:
    ========================================================================== */
+#gameDisplay {
+  width: 100%;
+  height: 100%;
+}
 #cr-stage { border:1px solid black; color:white }
 #charui {
   width:  520px;
