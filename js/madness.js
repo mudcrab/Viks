@@ -9,7 +9,7 @@ var Madness = Class.create({
     },
     setup: function()
     {
-        this.stage = new PistonStage();
+        this.stage = new PistonStage(0, 0, Math.floor($('gameDisplay').getWidth() / 32 + 1), Math.floor($('gameDisplay').getHeight() / 32 + 1));
         this.input = new PistonInput();
         for(var i = 0; i < Math.floor($('gameDisplay').getWidth() / 32 + 1); i++)
         {
@@ -21,9 +21,7 @@ var Madness = Class.create({
         }
         this.stage.addChild(this.testent);
         this.testent.properties.speed = 2;
-        this.testent.rectSize = {w: 500, h: 300};
-        this.testent.rectPos = {x: Math.floor($('gameDisplay').getWidth() / 2 - 250), y: Math.floor($('gameDisplay').getHeight() / 2 - 150)};
-        this.testent.rectVisible = true;
+        console.log(this.stage.entities.length)
     },
     draw: function()
     {
@@ -35,18 +33,22 @@ var Madness = Class.create({
         if(this.input.keyDown('w'))
         {
             this.testent.move(0, -this.testent.properties.speed);
+            this.stage.move(0, this.testent.properties.speed);
         }
         if(this.input.keyDown('s'))
         {
             this.testent.move(0, this.testent.properties.speed);
+            this.stage.move(0, -this.testent.properties.speed);
         }
         if(this.input.keyDown('a'))
         {
             this.testent.move(-this.testent.properties.speed, 0);
+            this.stage.move(this.testent.properties.speed, 0);
         }
         if(this.input.keyDown('d'))
         {
             this.testent.move(this.testent.properties.speed, 0);
+            this.stage.move(-this.testent.properties.speed, 0);
         }
     }
 });
