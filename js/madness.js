@@ -2,6 +2,8 @@ var Madness = Class.create({
     testent: null,
     stage: null,
     input: null,
+    camera: null,
+    entityCameraOffset: {},
     initialize: function()
     {
 
@@ -21,7 +23,16 @@ var Madness = Class.create({
         }
         this.stage.addChild(this.testent);
         this.testent.properties.speed = 2;
-        console.log(this.stage.entities.length)
+        this.camera = new PistonCamera();
+        this.camera.setCamera(this.testent);
+        this.camera.setPos(this.testent.pos.x - this.camera.rectSize.w / 2 + this.testent.size.w / 2, this.testent.pos.y - this.camera.rectSize.h / 2 + this.testent.size.h / 2);
+        this.stage.addChild(this.camera);
+        this.entityCameraOffset = {
+            top: this.testent.pos.y - this.camera.getPos().y,
+            left: this.testent.pos.x - this.camera.getPos().x
+        };
+        var that = this;
+        Event.observe(window, 'resize', function() { that.resize(); });
     },
     draw: function()
     {
@@ -32,24 +43,36 @@ var Madness = Class.create({
         $('fps').update(piston.fps);
         if(this.input.keyDown('w'))
         {
-            this.testent.move(0, -this.testent.properties.speed);
-            this.stage.move(0, this.testent.properties.speed);
+            this.camera.move(0, -$(this).testent.properties.speed);
+            this.testent.moveTo(this.camera.getPos().x + this.camera.rectSize.w / 2 - 16, this.camera.getPos().y + this.camera.rectSize.h / 2 - 16);
+
+            /*if(this.testent.pos.y <= this.camera.getPos().y)
+            {
+                this.camera.move(0, -$(this).testent.properties.speed);
+                this.camera.moveTo(this.camera.getPos().x, this.camera.getPos().y);
+            }
+            else
+                this.testent.move(0, -$(this).testent.properties.speed);*/
         }
         if(this.input.keyDown('s'))
         {
-            this.testent.move(0, this.testent.properties.speed);
-            this.stage.move(0, -this.testent.properties.speed);
+            this.camera.move(0, $(this).testent.properties.speed);
+            this.testent.moveTo(this.camera.getPos().x + this.camera.rectSize.w / 2 - 16, this.camera.getPos().y + this.camera.rectSize.h / 2 - 16);
         }
         if(this.input.keyDown('a'))
         {
-            this.testent.move(-this.testent.properties.speed, 0);
-            this.stage.move(this.testent.properties.speed, 0);
+            //this.testent.move(-this.testent.properties.speed, 0);
+            //this.stage.move(this.testent.properties.speed, 0);
         }
         if(this.input.keyDown('d'))
         {
-            this.testent.move(this.testent.properties.speed, 0);
-            this.stage.move(-this.testent.properties.speed, 0);
+            
         }
+        
+    },
+    resize: function()
+    {
+        
     }
 });
 var piston = new PistonEngine('gameDisplay', Madness);
