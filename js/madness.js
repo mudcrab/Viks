@@ -41,6 +41,7 @@ var Madness = Class.create({
     update: function()
     {
         $('fps').update(piston.fps);
+        jQuery('#renderer').html(piston.info().renderer);
         if(this.input.keyDown('w'))
         {
             this.camera.move(0, -$(this).testent.properties.speed);
