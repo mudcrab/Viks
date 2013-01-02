@@ -11,7 +11,11 @@ var Madness = Class.create({
     },
     setup: function()
     {
-        this.stage = new PistonStage(0, 0, Math.floor($('gameDisplay').getWidth() / 32 + 1), Math.floor($('gameDisplay').getHeight() / 32 + 1));
+        this.stage = new PistonStage(
+            {x: 0, y: 0}, 
+            {width: Math.floor($('gameDisplay').getWidth() / 32 + 1), height: Math.floor($('gameDisplay').getHeight() / 32 + 1),  
+            pxW: $('gameDisplay').getWidth(), pxH: $('gameDisplay').getHeight()}
+            );
         this.input = new PistonInput();
         for(var i = 0; i < Math.floor($('gameDisplay').getWidth() / 32 + 1); i++)
         {
@@ -62,14 +66,15 @@ var Madness = Class.create({
         }
         if(this.input.keyDown('a'))
         {
-            //this.testent.move(-this.testent.properties.speed, 0);
-            //this.stage.move(this.testent.properties.speed, 0);
+            this.camera.move(-$(this).testent.properties.speed, 0);
+            this.testent.moveTo(this.camera.getPos().x + this.camera.rectSize.w / 2 - 16, this.camera.getPos().y + this.camera.rectSize.h / 2 - 16);
         }
         if(this.input.keyDown('d'))
         {
-            
+            this.camera.move($(this).testent.properties.speed, 0);
+            this.testent.moveTo(this.camera.getPos().x + this.camera.rectSize.w / 2 - 16, this.camera.getPos().y + this.camera.rectSize.h / 2 - 16);
         }
-        
+        this.stage.update();
     },
     resize: function()
     {
