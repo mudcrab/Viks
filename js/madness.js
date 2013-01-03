@@ -48,31 +48,31 @@ var Madness = Class.create({
         jQuery('#renderer').html(piston.info().renderer);
         if(this.input.keyDown('w'))
         {
-            this.camera.move(0, -$(this).testent.properties.speed);
-            this.testent.moveTo(this.camera.getPos().x + this.camera.rectSize.w / 2 - 16, this.camera.getPos().y + this.camera.rectSize.h / 2 - 16);
-
-            /*if(this.testent.pos.y <= this.camera.getPos().y)
+            if(this.testent.pos.y >= 0)
             {
-                this.camera.move(0, -$(this).testent.properties.speed);
-                this.camera.moveTo(this.camera.getPos().x, this.camera.getPos().y);
+                this.testent.move(0, -$(this).testent.properties.speed);
             }
-            else
-                this.testent.move(0, -$(this).testent.properties.speed);*/
         }
         if(this.input.keyDown('s'))
         {
-            this.camera.move(0, $(this).testent.properties.speed);
-            this.testent.moveTo(this.camera.getPos().x + this.camera.rectSize.w / 2 - 16, this.camera.getPos().y + this.camera.rectSize.h / 2 - 16);
+            if(Math.abs(this.testent.pos.y + this.testent.size.h) <= this.stage.stageSize.pxH)
+            {
+                this.testent.move(0, $(this).testent.properties.speed);
+            }
         }
         if(this.input.keyDown('a'))
         {
-            this.camera.move(-$(this).testent.properties.speed, 0);
-            this.testent.moveTo(this.camera.getPos().x + this.camera.rectSize.w / 2 - 16, this.camera.getPos().y + this.camera.rectSize.h / 2 - 16);
+            if(this.testent.pos.x >= 0)
+            {
+                this.testent.move(-$(this).testent.properties.speed, 0);
+            }
         }
         if(this.input.keyDown('d'))
         {
-            this.camera.move($(this).testent.properties.speed, 0);
-            this.testent.moveTo(this.camera.getPos().x + this.camera.rectSize.w / 2 - 16, this.camera.getPos().y + this.camera.rectSize.h / 2 - 16);
+            if(Math.abs(this.testent.pos.x + this.testent.size.w) <= this.stage.stageSize.pxW)
+            {
+                this.testent.move($(this).testent.properties.speed, 0);
+            } 
         }
         this.stage.update();
     },
