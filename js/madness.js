@@ -67,7 +67,7 @@ var Madness = Class.create({
         }
         if(this.input.keyDown('s'))
         {
-
+            this.stage.move(0, -1);
         }
         if(this.input.keyDown('a'))
         {
@@ -84,11 +84,12 @@ var Madness = Class.create({
             //console.log(this.stage.entities[0].pos.x);
             //console.log(this.stage.entities[0].pos.y);
             console.log(this.testent.pos.y);
+            console.log(Util.objToString(this.stage.stagePos));
             //console.log(this.stage.drawnEntities);
         }
         this.stage.update();
         $('totalent').update(this.stage.entities.length);
-        $('drawnent').update(this.stage.drawnEntities);
+        $('drawnent').update(this.stage.drawableEntities.length);
     },
     resize: function()
     {
