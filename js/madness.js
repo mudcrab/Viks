@@ -1,5 +1,5 @@
 var Madness = Class.create({
-    testent: null,
+    player: null,
     stage: null,
     input: null,
     camera: null,
@@ -8,7 +8,6 @@ var Madness = Class.create({
     {
         Debug.init();
         Debug.setSize(250, 150);
-        this.testent = new PistonEntity({x: Math.floor($('gameDisplay').getWidth() / 2 - 16), y: Math.floor($('gameDisplay').getHeight() / 2 - 16)}, {w: 32, h: 32}, 'player', 'Entity test');
     },
     setup: function()
     {
@@ -28,6 +27,12 @@ var Madness = Class.create({
         };
         this.stage = new PistonStage({x: 0, y: 0}, stageSize);
         this.input = new PistonInput();
+        this.loadEntities(tilesW, tilesH);
+        this.stage.setup();
+        var that = this;
+        Event.observe(window, 'resize', function() { that.resize(); });
+    },
+    loadEntities: function(tilesW, tilesH) {
         for(var i = 0; i < tilesW; i++)
         {
             for(var j = 0; j < tilesH; j++)
@@ -36,19 +41,20 @@ var Madness = Class.create({
                 this.stage.addChild(new PistonEntity({x: i * 32, y: j * 32}, { w: 32, h: 32 }, 'grass' + rand));
             }
         }
-        this.stage.addChild(this.testent);
-        //this.testent.properties.speed = 2;
-        /*this.camera = new PistonCamera();
-        this.camera.setCamera(this.testent);
-        this.camera.setPos(this.testent.pos.x - this.camera.rectSize.w / 2 + this.testent.size.w / 2, this.testent.pos.y - this.camera.rectSize.h / 2 + this.testent.size.h / 2);
-        this.stage.addChild(this.camera);
-        this.entityCameraOffset = {
-            top: this.testent.pos.y - this.camera.getPos().y,
-            left: this.testent.pos.x - this.camera.getPos().x
-        };*/
-        this.stage.setup();
-        var that = this;
-        Event.observe(window, 'resize', function() { that.resize(); });
+        var pData = {
+            pos: {
+                x: Math.floor($('gameDisplay').getWidth() / 2 - 16),
+                y: Math.floor($('gameDisplay').getHeight() / 2 - 16)
+            },
+            size: {
+                w: 32,
+                h: 32
+            },
+            image: 'player',
+            name: 'Player 1'
+        };
+        this.player = new Player(pData.pos, pData.size, pData.image, pData.name);
+        this.stage.addChild(this.player);
     },
     draw: function()
     {
@@ -79,17 +85,12 @@ var Madness = Class.create({
         }
         if(this.input.keyUp('space'))
         {
-            //console.log(this.stage.entities[0].pos);
-            //console.log(Util.objToString(this.stage.stagePos));
-            //console.log(this.stage.entities[0].pos.x);
-            //console.log(this.stage.entities[0].pos.y);
-            console.log(this.testent.pos.y);
-            console.log(Util.objToString(this.stage.stagePos));
-            //console.log(this.stage.drawnEntities);
+            console.log(Util.objToString(this.stage.borderHit))
         }
         this.stage.update();
         $('totalent').update(this.stage.entities.length);
         $('drawnent').update(this.stage.drawableEntities.length);
+        jQuery('#stagexy').html('[' + this.stage.entities[0].pos.y + '] [ x: ' + this.stage.stagePos.x + ', y: ' + this.stage.stagePos.y + ' ]');
     },
     resize: function()
     {
