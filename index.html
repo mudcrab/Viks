@@ -16,7 +16,6 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 	<script src="js/libs/modernizr-2.5.3.min.js"></script>
-	<script src="https://raw.github.com/gameclosure/webgl-2d/master/webgl-2d.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/libs/prototype.js"></script>
 	<style>
@@ -49,8 +48,10 @@
 		<span class="legend">MOUSE: </span><span id="mousexy"></span><br />
 		<span class="legend">STAGE: </span><span id="stagexy"></span><br />
 	</div>
-	
-	<canvas id="gameDisplay"></canvas>
+	<div id="canvases">
+		<canvas id="gameDisplay"></canvas>
+		
+	</div>
 	<script src="js/utils.js"></script>
 	<script src="js/piston/core.js"></script>
 	<script src="js/piston/renderer.js"></script>

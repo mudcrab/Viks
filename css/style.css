@@ -78,7 +78,7 @@ td { vertical-align: top; }
 /* ===== Primary Styles ========================================================
    Author:
    ========================================================================== */
-#gameDisplay {
+#gameDisplay, #canvases {
   width: 100%;
   height: 100%;
 }
@@ -215,9 +215,10 @@ td { vertical-align: top; }
     font-size: 8pt;
 }
 .canvas {
-  width: 100%;
-  height: 100%;
   border: 1px solid red;
+  position: fixed;
+  top: 0px;
+  left: 0px;
 }
 
 

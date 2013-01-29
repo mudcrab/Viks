@@ -6,8 +6,8 @@ var Madness = Class.create({
     entityCameraOffset: {},
     initialize: function()
     {
-        Debug.init();
-        Debug.setSize(250, 150);
+        //Debug.init();
+        //Debug.setSize(250, 150);
     },
     setup: function()
     {
@@ -53,8 +53,9 @@ var Madness = Class.create({
             image: 'player',
             name: 'Player 1'
         };
+        this.stage.addLayer();
         this.player = new Player(pData.pos, pData.size, pData.image, pData.name);
-        this.stage.addChild(this.player);
+        this.stage.addChild(this.player, 1);
     },
     draw: function()
     {
@@ -87,7 +88,12 @@ var Madness = Class.create({
         {
             //console.log(Util.objToString(this.stage.borderHit));
             //console.log(Util.objToString(this.stage.layers));
-            console.log(this.stage.layers);
+            var fps = 0;
+            for(var i = 0; i < this.stage.layers.length; i++)
+            {
+                fps += this.stage.layers[i].renderer.fps();
+            }
+            console.log(fps)
         }
         this.stage.update();
         $('totalent').update(this.stage.entities.length);
