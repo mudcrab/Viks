@@ -85,12 +85,14 @@ var Madness = Class.create({
         }
         if(this.input.keyUp('space'))
         {
-            console.log(Util.objToString(this.stage.borderHit))
+            //console.log(Util.objToString(this.stage.borderHit));
+            //console.log(Util.objToString(this.stage.layers));
+            console.log(this.stage.layers);
         }
         this.stage.update();
         $('totalent').update(this.stage.entities.length);
         $('drawnent').update(this.stage.drawableEntities.length);
-        jQuery('#stagexy').html('[' + this.stage.entities[0].pos.y + '] [ x: ' + this.stage.stagePos.x + ', y: ' + this.stage.stagePos.y + ' ]');
+        //jQuery('#stagexy').html('[' + this.stage.entities[0].pos.y + '] [ x: ' + this.stage.stagePos.x + ', y: ' + this.stage.stagePos.y + ' ]');
     },
     resize: function()
     {

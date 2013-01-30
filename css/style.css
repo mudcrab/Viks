@@ -214,6 +214,11 @@ td { vertical-align: top; }
     font-family: "Source Code Pro Semibold";
     font-size: 8pt;
 }
+.canvas {
+  width: 100%;
+  height: 100%;
+  border: 1px solid red;
+}
 
 
 .clear {
