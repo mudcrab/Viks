@@ -165,46 +165,30 @@ td { vertical-align: top; }
   margin-left: -200px;
   z-index: 9001;
 }
+
 #actionbuttons {
-  width: 440px;
-  z-index: 9001;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  height: 50px;
 }
 .ab {
+  background: url('../assets/ab_frame.png');
   width: 40px;
   height: 40px;
   float: left;
-  /*border-radius: 3px;*/
-  border: 1px solid #464646;
-  background: #959595;
-  border-right: none;
+  margin-right: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
-.ab_inner {
+.ab_content {
+  width: 32px;
   height: 32px;
-  /*border-radius: 2px;*/
-  background: #b7b7b7;
-  border: 1px solid #ccc;
+  background: rgba(0, 0, 0, 0.7);
+  margin: 4px;
 }
-.ab_inner:hover {
-  height: 35px;
-}
-.radius_left {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
-.radius_right {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-.radius_left_s {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
-.radius_right_s {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-.border_right_ab {
-  border-right: 1px solid #464646;
+.ab_content:hover {
+  background: rgba(0, 0, 0, 0.9);
 }
 
 #debugWindow {
@@ -214,7 +198,7 @@ td { vertical-align: top; }
     position: fixed;
     z-index: 1000000;
     top: 50px;
-    left: 50px;
+    right: 20px;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 3px;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);

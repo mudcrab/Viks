@@ -1,4 +1,5 @@
 window.Debug = {
+    isShowing: false,
     size: {
         width: 400,
         height: 500
@@ -25,14 +26,17 @@ window.Debug = {
         console.error = console.debug = console.info =  console.log
 
         console.log('Debug window showing');
+        this.isShowing = true;
     },
     showDebug: function()
     {
-        jQuery('#debugWindow').show();
+        jQuery('#debugWindow').fadeIn();
+        this.isShowing = true;
     },
     hideDebug: function()
     {
-        jQuery('#debugWindow').hide();
+        jQuery('#debugWindow').fadeOut();
+        this.isShowing = false;
     },
     setSize: function(width_, height_)
     {
@@ -41,6 +45,17 @@ window.Debug = {
         jQuery('#debugWindow').width(this.size.width);
         jQuery('#debugWindow').height(this.size.height);
         jQuery('#debugContent').height(this.size.height - 20);
+    },
+    toggle: function()
+    {
+        if(this.isShowing)
+        {
+            this.hideDebug();
+        }
+        else
+        {
+            this.showDebug();
+        }
     }
 };
 window.Util = {

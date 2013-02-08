@@ -6,8 +6,15 @@ var Madness = Class.create({
     entityCameraOffset: {},
     initialize: function()
     {
-        //Debug.init();
-        //Debug.setSize(250, 150);
+        Debug.init();
+        Debug.setSize(250, 150);
+        Debug.hideDebug();
+        // palce the action buttons too
+        var abPos = $('actionbuttons').getWidth() / 2;
+        console.log(abPos)
+        $('actionbuttons').setStyle({
+            marginLeft: '-' + abPos + 'px'
+        });
         //console.log($(document.body).getWidth())
         //console.log($(document.body).getWidth())
     },
@@ -45,7 +52,10 @@ var Madness = Class.create({
             for(var j = 0; j < tilesH; j++)
             {
                 var rand = Math.floor(Math.random() * 3) + 1;
-                this.stage.addChild(new PistonEntity({x: i * 32, y: j * 32}, { w: 32, h: 32 }, 'grass' + rand), 0);
+                var tile = new PistonEntity({x: i * 32, y: j * 32}, { w: 32, h: 32 }, 'grass' + rand);
+                tile.scrollable = true;
+                tile.clickable = true;
+                this.stage.addChild(tile, 0);
             }
         }
         var pData = {
@@ -62,6 +72,7 @@ var Madness = Class.create({
         };
         //this.stage.addLayer();
         this.player = new Player(pData.pos, pData.size, pData.image, pData.name);
+        this.player.scrollable = true;
         this.stage.addChild(this.player, 1);
     },
     draw: function()
@@ -73,21 +84,12 @@ var Madness = Class.create({
 
         if(this.input.leftMouseClick('button'))
         {
-            console.log('buttonclick')
+            Debug.toggle();
         }
         if(this.input.leftMouseUp('gameDisplay'))
         {
-            console.log('display up');
+            console.log(this.stage.getClickedEntity(this.input.mouseXY.x, this.input.mouseXY.y));
         }
-
-        /*jQuery('#gameDisplay').click(function(e) {
-            e.stopPropagation();
-            console.log('canvas');
-        });
-        jQuery('.button').click(function(e) {
-            e.stopPropagation();
-            console.log('button');
-        });*/
         var charX, charY, stageX, stageY;
         $('fps').update(piston.fps);
         jQuery('#renderer').html(piston.info().renderer);
@@ -149,7 +151,8 @@ var Madness = Class.create({
             //console.log(this.stage.stageLayers[1].entities)
             //this.stage.addLayer(Math.floor(Math.random() * 100));
             //this.stage.addChild(new PistonEntity({x: 10, y: 10}, { w: 32, h: 32 }, 'player'), 1);
-            console.log(this.stage.stageSize)
+            
+            console.log(this.player.scrollable)
             //console.log(this.stage.layers[1].layerEntities);
             //this.stage.addLayer(2);
             //console.log(this.stage.layers);
