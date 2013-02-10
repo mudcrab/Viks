@@ -4,22 +4,32 @@ var Madness = Class.create({
     input: null,
     camera: null,
     entityCameraOffset: {},
+    toLoad: null,
     initialize: function()
     {
         Debug.init();
         Debug.setSize(250, 150);
-        Debug.hideDebug();
+        //Debug.hideDebug();
         // palce the action buttons too
         var abPos = $('actionbuttons').getWidth() / 2;
-        console.log(abPos)
         $('actionbuttons').setStyle({
             marginLeft: '-' + abPos + 'px'
         });
+        // console.log(this.loader.addAsset('image', 'player', 'player'));
+        this.toLoad = 
+        [
+            {
+                type: 'image',
+                file: 'player',
+                instanceName: 'plr'
+            }
+        ];
         //console.log($(document.body).getWidth())
         //console.log($(document.body).getWidth())
     },
     setup: function()
     {
+        
         var tilesW = 32;
         var tilesH = 17;
         var tileSize = {
@@ -39,7 +49,8 @@ var Madness = Class.create({
         this.loadEntities(tilesW, tilesH);
         this.stage.setup();
         this.input.addMouseHandler('click', 'button');
-        this.input.addMouseHandler('mouseup', 'gameDisplay');
+        this.input.addMouseHandler('mouseup', 'gameDisplay');  
+
         var that = this;
 
         Event.observe(window, 'resize', function() { that.resize(); });
