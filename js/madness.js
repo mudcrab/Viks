@@ -5,6 +5,7 @@ var Madness = Class.create({
     camera: null,
     entityCameraOffset: {},
     toLoad: null,
+    loader: null,
     initialize: function()
     {
         Debug.init();
@@ -22,6 +23,21 @@ var Madness = Class.create({
                 type: 'image',
                 file: 'player',
                 instanceName: 'plr'
+            },
+            {
+                type: 'image',
+                file: 'grass1',
+                instanceName: 'grass1'
+            },
+            {
+                type: 'image',
+                file: 'grass2',
+                instanceName: 'grass2'
+            },
+            {
+                type: 'image',
+                file: 'grass3',
+                instanceName: 'grass3'
             }
         ];
         //console.log($(document.body).getWidth())
@@ -29,7 +45,6 @@ var Madness = Class.create({
     },
     setup: function()
     {
-        
         var tilesW = 32;
         var tilesH = 17;
         var tileSize = {
@@ -63,7 +78,7 @@ var Madness = Class.create({
             for(var j = 0; j < tilesH; j++)
             {
                 var rand = Math.floor(Math.random() * 3) + 1;
-                var tile = new PistonEntity({x: i * 32, y: j * 32}, { w: 32, h: 32 }, 'grass' + rand);
+                var tile = new PistonEntity({x: i * 32, y: j * 32}, { w: 32, h: 32 }, this.loader.getAsset('grass' + rand).image);
                 tile.scrollable = true;
                 tile.clickable = true;
                 this.stage.addChild(tile, 0);
@@ -78,9 +93,10 @@ var Madness = Class.create({
                 w: 32,
                 h: 32
             },
-            image: 'player',
+            image: this.loader.getAsset('plr').image,
             name: 'Player 1'
         };
+        console.log(pData)
         //this.stage.addLayer();
         this.player = new Player(pData.pos, pData.size, pData.image, pData.name);
         this.player.scrollable = true;
@@ -92,7 +108,6 @@ var Madness = Class.create({
     },
     update: function()
     {
-
         if(this.input.leftMouseClick('button'))
         {
             Debug.toggle();
