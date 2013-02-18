@@ -10,6 +10,33 @@ var Madness = Class.create({
     {
         Debug.init();
         Debug.setSize(250, 150);
+
+
+        /*jQuery.getJSON('https://api.bitbucket.org/1.0/repositories/mudcrab/piston-engine/changesets?callback', function(data) {
+            console.log(data)
+        })*/
+
+        jQuery.ajax({
+            type: 'GET',
+            url: 'https://api.bitbucket.org/1.0/repositories/mudcrab/piston-engine/changesets?callback=?',
+            async: true,
+            jsonpCallback: 'jsonCallback',
+            contentType: "application/json",
+            dataType: 'jsonp',
+            done: function(json) {
+               console.dir(json.sites);
+            },
+            fail: function(e) {
+               console.log(e.message);
+            },
+            always: function() {}
+        });
+        jsonCallback = function(dat) {
+            var latest = dat.changesets.length - 1;
+            jQuery('#version').html(dat.changesets[latest].node);
+        };
+
+
         //Debug.hideDebug();
         // palce the action buttons too
         var abPos = $('actionbuttons').getWidth() / 2;
@@ -45,8 +72,10 @@ var Madness = Class.create({
     },
     setup: function()
     {
-        var tilesW = 32;
-        var tilesH = 17;
+        //var tilesW = 32;
+        //var tilesH = 17;
+        var tilesW = 40;
+        var tilesH = 30;
         var tileSize = {
             w: 32,
             h: 32

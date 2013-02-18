@@ -1,11 +1,15 @@
 /* =============================================================================
    HTML5 Boilerplate CSS: h5bp.com/css
    ========================================================================== */
+
 html, body {
   overflow: hidden;
   height: 100%;
   width: 100%;
   margin: 0;
+}
+body {
+  font-family: "Open Sans";
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
 audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
@@ -83,6 +87,7 @@ td { vertical-align: top; }
   height: 100%;
 }
 #details {
+  display: none;
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -92,12 +97,28 @@ td { vertical-align: top; }
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
   color: #fff;
   min-width: 200px;
-  font-family: Open Sans;
+  font-family: "Open Sans";
   z-index: 100000;
 }
-#fps, #uifps {
-  font-size: 16pt;
+#fps, #version, #ents { 
+  position: fixed; color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0px 1px 3px rgba(85, 85, 85, 0.7);
+  z-index: 100000;
+}
+#fps {
+  font-size: 24pt;
   font-weight: 700;
+  top: 20px;
+  left: 20px;
+  
+}
+#version {
+  bottom: 20px;
+  left: 20px;
+}
+#ents {
+  bottom: 20px;
+  right: 20px;
 }
 #cr-stage { border:1px solid black; color:white }
 #charui {
