@@ -10,11 +10,9 @@ var Madness = Class.create({
     {
         Debug.init();
         Debug.setSize(250, 150);
+        Debug.toggle();
 
-
-        /*jQuery.getJSON('https://api.bitbucket.org/1.0/repositories/mudcrab/piston-engine/changesets?callback', function(data) {
-            console.log(data)
-        })*/
+        jQuery('#button').hide();
 
         jQuery.ajax({
             type: 'GET',
@@ -213,8 +211,8 @@ var Madness = Class.create({
             //console.log(this.stage.layers);
         }
         this.stage.update();
-        $('totalent').update(this.stage.entities.length);
-        $('drawnent').update(this.stage.drawableEntities.length);
+        $('totalent').update('T: ' + this.stage.entities.length);
+        $('drawnent').update('D: ' + this.stage.drawnEntities);
         jQuery('#stagexy').html('[' + this.stage.entities[0].pos.y + '] [ x: ' + this.stage.stagePos.x + ', y: ' + this.stage.stagePos.y + ' ]');
     },
     resize: function()

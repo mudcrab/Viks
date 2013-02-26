@@ -25,7 +25,7 @@ window.Debug = {
         };
         console.error = console.debug = console.info =  console.log
 
-        console.log('Debug window showing');
+        // console.log('Debug window showing');
         this.isShowing = true;
     },
     showDebug: function()

@@ -21,6 +21,9 @@
 	
 </head>
 <body>
+	<div id="game-ui">
+		<img src="./assets/owdl/ui.png" />
+	</div>
 	<div id="button" class="button">Le buttón</div>
 	<div id="actionbuttons">
 		<div class="ab">
@@ -57,15 +60,10 @@
 		<div class="clear"></div>
 	</div>
 	<div id="fps"></div>
-	<div id="version"></div>
+	<div class="debug_text" id="version"></div>
 	<div id="ents">
-		<div id="totalent"></div>
-		<div id="drawnent"></div>
-	</div>
-	<div id="details">
-		
-		<span class="legend">MOUSE: </span><span id="mousexy"></span><br />
-		<span class="legend">STAGE: </span><span id="stagexy"></span><br />
+		<div class="debug_text" id="totalent"></div>
+		<div class="debug_text" id="drawnent"></div>
 	</div>
 	<div id="canvases">
 		<canvas id="gameDisplay"></canvas>
@@ -80,6 +78,9 @@
 	<script src="js/piston/input.js"></script>
 	<script src="js/piston/camera.js"></script>
 	<script src="js/piston/loader.js"></script>
+	<script src="js/piston/debug.js"></script>
+
+
 	<script src="js/viks/player.js"></script>
 	<script src="js/madness.js"></script>
 </body>

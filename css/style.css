@@ -100,8 +100,18 @@ td { vertical-align: top; }
   font-family: "Open Sans";
   z-index: 100000;
 }
+#game-ui {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+.debug_text {
+  font-weight: 900;
+}
 #fps, #version, #ents { 
-  position: fixed; color: rgba(255, 255, 255, 0.7);
+  position: fixed; 
+  /*color: rgba(255, 255, 255, 0.7);*/
+  color: #fff;
   text-shadow: 0px 1px 3px rgba(85, 85, 85, 0.7);
   z-index: 100000;
 }
@@ -109,7 +119,7 @@ td { vertical-align: top; }
   font-size: 24pt;
   font-weight: 700;
   top: 20px;
-  left: 20px;
+  right: 20px;
   
 }
 #version {
