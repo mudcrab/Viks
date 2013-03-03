@@ -103,7 +103,7 @@ td { vertical-align: top; }
 #game-ui {
   position: fixed;
   top: 20px;
-  left: 20px;
+  left: 30px;
 }
 .debug_text {
   font-weight: 900;
@@ -260,7 +260,81 @@ td { vertical-align: top; }
 .button:active {
   background: rgba(237, 237, 237, 0.8);
 }
-
+#charFrame {
+  float: left;
+  padding: 1px;
+  -webkit-transform: rotate(45deg);
+  border: 1px solid #d8b175;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+}
+#charFrameContent {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #2b2b2b;
+  outline: 1px solid #67553b;
+  width: 60px;
+  height: 60px;
+}
+#leftFrame {
+  float: left;
+  margin-top: -6px;
+  display: none;
+}
+#fTopL {
+  -webkit-transform: skew(-45deg);
+  border: 1px solid #d8b175;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+  padding: 1px;
+}
+#fBottomL {
+  margin-top: 10px;
+ border: 1px solid #d8b175;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+  -webkit-transform: skew(45deg);
+  padding: 1px;
+}
+#rightFrame {
+  margin-top: -4px;
+  float: left;
+  margin-left: 10px; 
+}
+#fTopR {
+  padding: 1px;
+  margin-top: 10px;
+  border: 1px solid #d8b175;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+  -webkit-transform: skew(45deg);
+}
+#fBottomR {
+  padding: 1px;
+  margin-top: 10px;
+  border: 1px solid #d8b175;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+  -webkit-transform: skew(-45deg);
+}
+#fTopLC, #fBottomLC, #fTopRC, #fBottomRC {
+  border: 1px solid #2b2b2b;
+  outline: 1px solid #67553b;
+}
+#fTopLC, #fBottomLC {
+  height: 20px;
+  width: 60px;
+}
+#fTopRC, #fBottomRC {
+  height: 15px;
+  width: 200px;
+}
+#fTopLC {
+  background: rgba(242, 101, 34, 0.7);
+}
+#fBottomLC {
+  background: rgba(236, 0, 140, 0.7);
+}
+#fTopRC {
+  background: rgba(247, 18, 27, 0.7);
+}
+#fBottomRC {
+  background: rgba(0, 191, 243, 0.7); 
+}
 
 .clear {
   clear: both;

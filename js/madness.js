@@ -153,11 +153,11 @@ var Madness = Class.create({
             if(this.player.pos.y <= 0)
             {
                 this.player.move(0, 0);
-                this.stage.move(0, 1);
             }
             else
             {
-                this.player.move(0, -1);
+                this.player.move(0, -2);
+                this.stage.move(0, 1);
             }
         }
         if(this.input.keyDown('s'))
@@ -165,11 +165,12 @@ var Madness = Class.create({
             if(this.player.pos.y + 32 >= this.stage.stageSize.screenHeight)
             {
                 this.player.move(0, 0);
-                this.stage.move(0, -1);
             }
             else
             {
-                this.player.move(0, 1);
+                
+                this.player.move(0, 2);
+                this.stage.move(0, -1);
             }
         }
         if(this.input.keyDown('a'))
@@ -177,11 +178,11 @@ var Madness = Class.create({
             if(this.player.pos.x <= 0)
             {
                 this.player.move(0, 0);
-                this.stage.move(1, 0);
             }
             else
             {
-                this.player.move(-1, 0);
+                this.player.move(-2, 0);
+                this.stage.move(1, 0);
             }
         }
         if(this.input.keyDown('d'))
@@ -189,11 +190,11 @@ var Madness = Class.create({
             if(this.player.pos.x + 32 >= this.stage.stageSize.screenWidth)
             {
                 this.player.move(0, 0);
-                this.stage.move(-1, 0);
             }
             else
             {
-                this.player.move(1, 0);
+                this.player.move(2, 0);
+                this.stage.move(-1, 0);
             }
         }
         if(this.input.keyUp('space'))
