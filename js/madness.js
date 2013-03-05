@@ -12,6 +12,24 @@ var Madness = Class.create({
         Debug.setSize(250, 150);
         Debug.toggle();
 
+
+        jQuery('#char_frame_outer_ring').easyPieChart({
+            trackColor: false,
+            scaleColor: false,
+            lineWidth: 3,
+            barColor: "#19c0ff",
+            size: 74,
+            animate: 800
+        });
+        jQuery('#char_frame_inner_ring').easyPieChart({
+            trackColor: false,
+            scaleColor: false,
+            lineWidth: 3,
+            barColor: "#fa012a",
+            size: 68,
+            animate: 800
+        });
+
         jQuery('#button').hide();
 
         jQuery.ajax({
@@ -46,7 +64,7 @@ var Madness = Class.create({
         [
             {
                 type: 'image',
-                file: 'player',
+                file: 'sprites',
                 instanceName: 'plr'
             },
             {
@@ -63,6 +81,20 @@ var Madness = Class.create({
                 type: 'image',
                 file: 'grass3',
                 instanceName: 'grass3'
+            },
+            {
+                type: 'spritemap',
+                file: 'sprites',
+                instanceName: 'main',
+                sprites: [
+                    {
+                        startX: 0,
+                        startY: 0,
+                        stopX: 32,
+                        stopY: 32,
+                        instanceName: 'plr'
+                    }
+                ]
             }
         ];
         //console.log($(document.body).getWidth())
@@ -100,7 +132,7 @@ var Madness = Class.create({
     loadEntities: function(tilesW, tilesH) {
         this.stage.addLayer(0);
         this.stage.addLayer(1);
-        for(var i = 0; i < tilesW; i++)
+        /*for(var i = 0; i < tilesW; i++)
         {
             for(var j = 0; j < tilesH; j++)
             {
@@ -110,7 +142,7 @@ var Madness = Class.create({
                 tile.clickable = true;
                 this.stage.addChild(tile, 0);
             }
-        }
+        }*/
         var pData = {
             pos: {
                 x: Math.floor($('gameDisplay').getWidth() / 2 - 16),
@@ -123,11 +155,28 @@ var Madness = Class.create({
             image: this.loader.getAsset('plr').image,
             name: 'Player 1'
         };
-        console.log(pData)
+        var pData_ = {
+            pos: {
+                x: Math.floor($('gameDisplay').getWidth() / 2 - 16),
+                y: Math.floor($('gameDisplay').getHeight() / 2 - 16)
+            },
+            size: {
+                w: 32,
+                h: 32
+            },
+            image: this.loader.getAsset('plr').image,
+            name: 'Player 2'
+        };
         //this.stage.addLayer();
+        //console.log(pData.image)
         this.player = new Player(pData.pos, pData.size, pData.image, pData.name);
         this.player.scrollable = true;
         this.stage.addChild(this.player, 1);
+        //console.log(this.loader.getAsset({name: 'main', sprite: 'plr'}, 'spritemap'))
+        var testObj = new PistonEntity({x: 300, y: 300}, { w: 32, h: 32 }, this.loader.getAsset({name: 'main', sprite: 'plr'}, 'spritemap'));
+        testObj.scrollable = true;
+        testObj.clickable = true;
+        this.stage.addChild(testObj, 0);
     },
     draw: function()
     {
@@ -206,7 +255,9 @@ var Madness = Class.create({
             //this.stage.addLayer(Math.floor(Math.random() * 100));
             //this.stage.addChild(new PistonEntity({x: 10, y: 10}, { w: 32, h: 32 }, 'player'), 1);
             
-            console.log(this.player.scrollable)
+            //console.log(this.player.scrollable)
+            jQuery('#char_frame_outer_ring').data('easyPieChart').update(Math.floor(Math.random() * 100));
+            jQuery('#char_frame_inner_ring').data('easyPieChart').update(Math.floor(Math.random() * 100));
             //console.log(this.stage.layers[1].layerEntities);
             //this.stage.addLayer(2);
             //console.log(this.stage.layers);
