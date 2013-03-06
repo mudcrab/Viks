@@ -8,9 +8,34 @@ var Madness = Class.create({
     loader: null,
     initialize: function()
     {
-        Debug.init();
+
+        var cc = document.createElement('canvas');
+        var c = document.createElement('canvas');
+        var img = new Image();
+        img.src = "/assets/sprites.png";
+        img.onload = function() {  }
+        setTimeout(function() {
+            cc.width = 32;
+            cc.height = 32;
+            cc.getContext('2d').drawImage(img, 32, 0, 32, 32, 0, 0, 32, 32);
+            var image = new Image();
+            image.src = cc.toDataURL("image/png");
+            c.width = 160;
+            c.height = 160;
+            image.onload = function()
+            {
+                //console.log(image.src)
+                //c.getContext('2d').drawImage(image, 0, 0);    
+                //jQuery('#ents').append(c);
+            }
+            
+        }, 500);
+
+
+
+        /*Debug.init();
         Debug.setSize(250, 150);
-        Debug.toggle();
+        Debug.toggle();*/
 
 
         jQuery('#char_frame_outer_ring').easyPieChart({
@@ -88,11 +113,11 @@ var Madness = Class.create({
                 instanceName: 'main',
                 sprites: [
                     {
-                        startX: 0,
-                        startY: 0,
-                        stopX: 32,
-                        stopY: 32,
-                        instanceName: 'plr'
+                        y: 0,
+                        x: 32,
+                        w: 32,
+                        h: 32,
+                        instanceName: 'plra'
                     }
                 ]
             }
@@ -173,10 +198,17 @@ var Madness = Class.create({
         this.player.scrollable = true;
         this.stage.addChild(this.player, 1);
         //console.log(this.loader.getAsset({name: 'main', sprite: 'plr'}, 'spritemap'))
-        var testObj = new PistonEntity({x: 300, y: 300}, { w: 32, h: 32 }, this.loader.getAsset({name: 'main', sprite: 'plr'}, 'spritemap'));
+        var self = this;
+        var testObj = new PistonEntity({x: 300, y: 300}, { w: 32, h: 32 }, self.loader.getAsset('plra').image);
         testObj.scrollable = true;
         testObj.clickable = true;
-        this.stage.addChild(testObj, 0);
+        self.stage.addChild(testObj, 0);
+
+        //console.log(self.loader.getAsset('plr').image);
+        //console.log(self.loader.getAsset('plra').image);
+
+        jQuery('#ents').append(self.loader.getAsset('plra').image);
+        
     },
     draw: function()
     {
