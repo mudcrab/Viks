@@ -88,36 +88,37 @@ var Madness = Class.create({
         this.toLoad = 
         [
             {
-                type: 'image',
-                file: 'sprites',
-                instanceName: 'plr'
-            },
-            {
-                type: 'image',
-                file: 'grass1',
-                instanceName: 'grass1'
-            },
-            {
-                type: 'image',
-                file: 'grass2',
-                instanceName: 'grass2'
-            },
-            {
-                type: 'image',
-                file: 'grass3',
-                instanceName: 'grass3'
-            },
-            {
                 type: 'spritemap',
                 file: 'sprites',
                 instanceName: 'main',
                 sprites: [
                     {
+                        x: 0,
                         y: 0,
-                        x: 32,
                         w: 32,
                         h: 32,
-                        instanceName: 'plra'
+                        instanceName: 'grass1'
+                    },
+                    {
+                        x: 32,
+                        y: 0,
+                        w: 32,
+                        h: 32,
+                        instanceName: 'grass2'
+                    },
+                    {
+                        x: 64,
+                        y: 0,
+                        w: 32,
+                        h: 32,
+                        instanceName: 'grass3'
+                    },
+                    {
+                        x: 96,
+                        y: 0,
+                        w: 32,
+                        h: 32,
+                        instanceName: 'plr'
                     }
                 ]
             }
@@ -157,7 +158,7 @@ var Madness = Class.create({
     loadEntities: function(tilesW, tilesH) {
         this.stage.addLayer(0);
         this.stage.addLayer(1);
-        /*for(var i = 0; i < tilesW; i++)
+        for(var i = 0; i < tilesW; i++)
         {
             for(var j = 0; j < tilesH; j++)
             {
@@ -167,7 +168,7 @@ var Madness = Class.create({
                 tile.clickable = true;
                 this.stage.addChild(tile, 0);
             }
-        }*/
+        }
         var pData = {
             pos: {
                 x: Math.floor($('gameDisplay').getWidth() / 2 - 16),
@@ -198,16 +199,10 @@ var Madness = Class.create({
         this.player.scrollable = true;
         this.stage.addChild(this.player, 1);
         //console.log(this.loader.getAsset({name: 'main', sprite: 'plr'}, 'spritemap'))
-        var self = this;
-        var testObj = new PistonEntity({x: 300, y: 300}, { w: 32, h: 32 }, self.loader.getAsset('plra').image);
-        testObj.scrollable = true;
-        testObj.clickable = true;
-        self.stage.addChild(testObj, 0);
-
+ 
         //console.log(self.loader.getAsset('plr').image);
         //console.log(self.loader.getAsset('plra').image);
 
-        jQuery('#ents').append(self.loader.getAsset('plra').image);
         
     },
     draw: function()
@@ -280,19 +275,8 @@ var Madness = Class.create({
         }
         if(this.input.keyUp('space'))
         {
-            //console.log(Util.objToString(this.stage.borderHit));
-            //console.log(Util.objToString(this.stage.layers));
-            //console.log(this.stage.stageLayers[0].entities.length, this.stage.stageLayers[1].entities.length);
-            //console.log(this.stage.stageLayers[1].entities)
-            //this.stage.addLayer(Math.floor(Math.random() * 100));
-            //this.stage.addChild(new PistonEntity({x: 10, y: 10}, { w: 32, h: 32 }, 'player'), 1);
-            
-            //console.log(this.player.scrollable)
             jQuery('#char_frame_outer_ring').data('easyPieChart').update(Math.floor(Math.random() * 100));
             jQuery('#char_frame_inner_ring').data('easyPieChart').update(Math.floor(Math.random() * 100));
-            //console.log(this.stage.layers[1].layerEntities);
-            //this.stage.addLayer(2);
-            //console.log(this.stage.layers);
         }
         this.stage.update();
         $('totalent').update('T: ' + this.stage.entities.length);
