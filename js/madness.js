@@ -156,9 +156,14 @@ var Madness = Class.create({
         Event.observe(window, 'resize', function() { that.resize(); });
     },
     loadEntities: function(tilesW, tilesH) {
+
+        var self = this;
+
         this.stage.addLayer(0);
         this.stage.addLayer(1);
-        for(var i = 0; i < tilesW; i++)
+        this.stage.addLayer(2);
+        this.stage.addLayer(3);
+        /*for(var i = 0; i < tilesW; i++)
         {
             for(var j = 0; j < tilesH; j++)
             {
@@ -168,7 +173,20 @@ var Madness = Class.create({
                 tile.clickable = true;
                 this.stage.addChild(tile, 0);
             }
-        }
+        }*/
+
+        var map = new PistonTiledMap('test.json');
+        map.parseTiled(function(d) { 
+            for(var t = 0; t < d.length; t++)
+            {
+                var tile = new PistonEntity(d[t].pos, d[t].size, self.loader.getAsset(d[t].imageName).image);
+                tile.scrollable = true;
+                tile.clickable = true;
+                console.log(tile)
+                self.stage.addChild(tile, 0);
+            }
+        });
+
         var pData = {
             pos: {
                 x: Math.floor($('gameDisplay').getWidth() / 2 - 16),
@@ -197,6 +215,7 @@ var Madness = Class.create({
         //console.log(pData.image)
         this.player = new Player(pData.pos, pData.size, pData.image, pData.name);
         this.player.scrollable = true;
+        console.log(this.player)
         this.stage.addChild(this.player, 1);
         //console.log(this.loader.getAsset({name: 'main', sprite: 'plr'}, 'spritemap'))
  
