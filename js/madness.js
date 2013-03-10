@@ -9,35 +9,6 @@ var Madness = Class.create({
     loader: null,
     initialize: function()
     {
-        var cc = document.createElement('canvas');
-        var c = document.createElement('canvas');
-        var img = new Image();
-        img.src = "/assets/sprites.png";
-        img.onload = function() {  }
-        setTimeout(function() {
-            cc.width = 32;
-            cc.height = 32;
-            cc.getContext('2d').drawImage(img, 32, 0, 32, 32, 0, 0, 32, 32);
-            var image = new Image();
-            image.src = cc.toDataURL("image/png");
-            c.width = 160;
-            c.height = 160;
-            image.onload = function()
-            {
-                //console.log(image.src)
-                //c.getContext('2d').drawImage(image, 0, 0);    
-                //jQuery('#ents').append(c);
-            }
-            
-        }, 500);
-
-
-
-        /*Debug.init();
-        Debug.setSize(250, 150);
-        Debug.toggle();*/
-
-
         jQuery('#char_frame_outer_ring').easyPieChart({
             trackColor: false,
             scaleColor: false,
@@ -128,8 +99,6 @@ var Madness = Class.create({
     },
     setup: function()
     {
-        //var tilesW = 32;
-        //var tilesH = 17;
         var tilesW = 40;
         var tilesH = 30;
         var tileSize = {
@@ -156,35 +125,21 @@ var Madness = Class.create({
         Event.observe(window, 'resize', function() { that.resize(); });
     },
     loadEntities: function(tilesW, tilesH) {
-
-        var self = this;
-
         piston.stage.addLayer(0);
         piston.stage.addLayer(1);
-        piston.stage.addLayer(2);
-        piston.stage.addLayer(3);
-        /*for(var i = 0; i < tilesW; i++)
-        {
-            for(var j = 0; j < tilesH; j++)
+
+        var map = new PistonTiledMap('test2.json');
+        map.parseTiled(function(data) {
+            for(var i = 0; i < data.length; i++)
             {
-                var rand = Math.floor(Math.random() * 3) + 1;
-                var tile = new PistonEntity({x: i * 32, y: j * 32}, { w: 32, h: 32 }, this.loader.getAsset('grass' + rand).image);
+                var tile = new PistonEntity(data[i].pos, data[i].size, piston.loader.getAsset(data[i].imageName).image);
                 tile.scrollable = true;
                 tile.clickable = true;
-                this.stage.addChild(tile, 0);
-            }
-        }*/
-
-        this.loadMap('asd', function(entities) {
-            for(var i = 0; i < entities.length; i++)
-            {
-                //console.log(entities[i])
-                piston.stage.addChild(entities[i], 0);
+                piston.stage.addChild(tile, data[i].layer);
             }
             piston.stage.setup();
             piston.piston.redraw();
         });
-        
 
         var pData = {
             pos: {
@@ -195,49 +150,13 @@ var Madness = Class.create({
                 w: 32,
                 h: 32
             },
-            image: this.loader.getAsset('plr').image,
+            image: piston.loader.getAsset('plr').image,
             name: 'Player 1'
         };
-        var pData_ = {
-            pos: {
-                x: Math.floor($('gameDisplay').getWidth() / 2 - 16),
-                y: Math.floor($('gameDisplay').getHeight() / 2 - 16)
-            },
-            size: {
-                w: 32,
-                h: 32
-            },
-            image: this.loader.getAsset('plr').image,
-            name: 'Player 2'
-        };
-        //this.stage.addLayer();
-        //console.log(pData.image)
+        
         this.player = new Player(pData.pos, pData.size, pData.image, pData.name);
         this.player.scrollable = true;
-        //console.log(this.player)
         piston.stage.addChild(this.player, 1);
-        //console.log(this.loader.getAsset({name: 'main', sprite: 'plr'}, 'spritemap'))
- 
-        //console.log(self.loader.getAsset('plr').image);
-        //console.log(self.loader.getAsset('plra').image);
-
-        
-    },
-    loadMap: function(mapfile, cb)
-    {
-        var self = this;
-        var map = new PistonTiledMap('test2.json');
-        var entities = [];
-        map.parseTiled(function(d) {
-            for(var t = 0; t < d.length; t++)
-            {
-                var tile = new PistonEntity(d[t].pos, d[t].size, self.loader.getAsset(d[t].imageName).image);
-                tile.scrollable = true;
-                tile.clickable = true;
-                entities.push(tile);    
-            }
-            cb(entities);
-        });
     },
     draw: function()
     {
@@ -254,9 +173,8 @@ var Madness = Class.create({
             console.log(piston.stage.getClickedEntity(this.input.mouseXY.x, this.input.mouseXY.y));
         }
         var charX, charY, stageX, stageY;
-        $('fps').update(piston.core.fps);
-        jQuery('#renderer').html(piston.core.info().renderer);
         
+        $('fps').update(piston.core.fps);
         
         if(this.input.keyDown('w'))
         {
