@@ -56,44 +56,7 @@ var Madness = Class.create({
             marginLeft: '-' + abPos + 'px'
         });
         // console.log(this.loader.addAsset('image', 'player', 'player'));
-        this.toLoad = 
-        [
-            {
-                type: 'spritemap',
-                file: 'sprites',
-                instanceName: 'main',
-                sprites: [
-                    {
-                        x: 0,
-                        y: 0,
-                        w: 32,
-                        h: 32,
-                        instanceName: 'grass1'
-                    },
-                    {
-                        x: 32,
-                        y: 0,
-                        w: 32,
-                        h: 32,
-                        instanceName: 'grass2'
-                    },
-                    {
-                        x: 64,
-                        y: 0,
-                        w: 32,
-                        h: 32,
-                        instanceName: 'grass3'
-                    },
-                    {
-                        x: 96,
-                        y: 0,
-                        w: 32,
-                        h: 32,
-                        instanceName: 'plr'
-                    }
-                ]
-            }
-        ];
+        this.toLoad = toLoad;
         //console.log($(document.body).getWidth())
         //console.log($(document.body).getWidth())
     },
@@ -150,12 +113,13 @@ var Madness = Class.create({
                 w: 32,
                 h: 32
             },
-            image: piston.loader.getAsset('plr').image,
+            image: piston.loader.getAsset('c_down_0').image,
             name: 'Player 1'
         };
         
         this.player = new Player(pData.pos, pData.size, pData.image, pData.name);
         this.player.scrollable = true;
+        this.player.manual = true;
         piston.stage.addChild(this.player, 1);
     },
     draw: function()
