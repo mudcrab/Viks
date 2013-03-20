@@ -32,26 +32,26 @@ var Player = Class.create(PistonEntity, {
 		{
 			if(self.animationLeft.currentFrame +1 != self.animationLeft.maxFrames)
 			{
-				self.image = piston.loader.getAsset(self.animationLeft.frames[self.animationLeft.currentFrame]).image;
+				self.image = self.animationLeft.frames[self.animationLeft.currentFrame];
 				self.animationLeft.currentFrame++;
 			}
 			else
 			{
 				self.animationLeft.currentFrame = 0;
-				self.image = piston.loader.getAsset(self.animationLeft.frames[0]).image;
+				self.image = self.animationLeft.frames[0];
 			}
 		}
 		else if(x > 0)
 		{
 			if(self.animationRight.currentFrame +1 != self.animationRight.maxFrames)
 			{
-				self.image = piston.loader.getAsset(self.animationRight.frames[self.animationRight.currentFrame]).image;
+				self.image = self.animationRight.frames[self.animationRight.currentFrame];
 				self.animationRight.currentFrame++;
 			}
 			else
 			{
 				self.animationRight.currentFrame = 0;
-				self.image = piston.loader.getAsset(self.animationRight.frames[0]).image;
+				self.image = self.animationRight.frames[0];
 			}
 		}
 
@@ -59,39 +59,31 @@ var Player = Class.create(PistonEntity, {
 		{
 			if(self.animationDown.currentFrame +1 != self.animationDown.maxFrames)
 			{
-				self.image = piston.loader.getAsset(self.animationDown.frames[self.animationDown.currentFrame]).image;
+				self.image = self.animationDown.frames[self.animationDown.currentFrame];
 				self.animationDown.currentFrame++;
 			}
 			else
 			{
 				self.animationDown.currentFrame = 0;
-				self.image = piston.loader.getAsset(self.animationDown.frames[0]).image;
+				self.image = self.animationDown.frames[0];
 			}
 		}
 		else if(y < 0)
 		{
 			if(self.animationUp.currentFrame +1 != self.animationUp.maxFrames)
 			{
-				self.image = piston.loader.getAsset(self.animationUp.frames[self.animationUp.currentFrame]).image;
+				self.image = self.animationUp.frames[self.animationUp.currentFrame];
 				self.animationUp.currentFrame++;
 			}
 			else
 			{
 				self.animationUp.currentFrame = 0;
-				self.image = piston.loader.getAsset(self.animationUp.frames[0]).image;
+				self.image = self.animationUp.frames[0];
 			}
 		}	
 	},
 	update: function()
 	{
-		/*if(x < 0)
-			this.image = piston.loader.getAsset('c_right').image;
-		else if(x > 0)
-			this.image = piston.loader.getAsset('c_left').image;
-
-		if(y > 0)
-			this.image = piston.loader.getAsset('c_up').image;
-		else if(y < 0)
-			this.image = piston.loader.getAsset('c_down').image;*/
+		
 	}
 });

@@ -1,4 +1,6 @@
 
+
+
 var Madness = Class.create({
     player: null,
     stage: null,
@@ -9,6 +11,7 @@ var Madness = Class.create({
     loader: null,
     initialize: function()
     {
+        piston.debug.enabled = false;
         jQuery('#char_frame_outer_ring').easyPieChart({
             trackColor: false,
             scaleColor: false,
@@ -79,29 +82,30 @@ var Madness = Class.create({
         piston.stage = new PistonStage({x: 0, y: 0}, stageSize);
         this.input = new PistonInput();
         this.loadEntities(tilesW, tilesH);
-        piston.stage.setup();
+        
         this.input.addMouseHandler('click', 'button');
         this.input.addMouseHandler('mouseup', 'gameDisplay');  
+
+        piston.stage.setup();
 
         var that = this;
 
         Event.observe(window, 'resize', function() { that.resize(); });
     },
     loadEntities: function(tilesW, tilesH) {
-        piston.stage.addLayer(0);
-        piston.stage.addLayer(1);
+        piston.stage.addLayer(0, 32);
+        piston.stage.addLayer(1, 32);
 
         var map = new PistonTiledMap('test2.json');
         map.parseTiled(function(data) {
             for(var i = 0; i < data.length; i++)
             {
-                var tile = new PistonEntity(data[i].pos, data[i].size, piston.loader.getAsset(data[i].imageName).image);
+                var tile = new PistonEntity(data[i].pos, data[i].size, data[i].imageName);
                 tile.scrollable = true;
                 tile.clickable = true;
                 piston.stage.addChild(tile, data[i].layer);
             }
             piston.stage.setup();
-            piston.piston.redraw();
         });
 
         var pData = {
@@ -110,10 +114,10 @@ var Madness = Class.create({
                 y: Math.floor($('gameDisplay').getHeight() / 2 - 16)
             },
             size: {
-                w: 32,
-                h: 32
+                w: 128,
+                h: 128
             },
-            image: piston.loader.getAsset('c_down_0').image,
+            image: 'c_down_0',
             name: 'Player 1'
         };
         
@@ -121,6 +125,9 @@ var Madness = Class.create({
         this.player.scrollable = true;
         this.player.manual = true;
         piston.stage.addChild(this.player, 1);
+
+
+
     },
     draw: function()
     {
@@ -193,10 +200,11 @@ var Madness = Class.create({
         {
             jQuery('#char_frame_outer_ring').data('easyPieChart').update(Math.floor(Math.random() * 100));
             jQuery('#char_frame_inner_ring').data('easyPieChart').update(Math.floor(Math.random() * 100));
+            
         }
         piston.stage.update();
-        $('totalent').update('T: ' + piston.stage.entities.length);
-        $('drawnent').update('D: ' + piston.stage.drawnEntities);
+        $('totalent').update('T: ' + piston.renderer.entityInfo.total);
+        $('drawnent').update('D: ' + piston.renderer.entityInfo.drawn);
         jQuery('#stagexy').html('[' + piston.stage.entities[0].pos.y + '] [ x: ' + piston.stage.stagePos.x + ', y: ' + piston.stage.stagePos.y + ' ]');
     },
     resize: function()
