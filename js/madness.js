@@ -95,16 +95,10 @@ var Madness = Class.create({
     loadEntities: function(tilesW, tilesH) {
         piston.stage.addLayer(0, 32);
         piston.stage.addLayer(1, 32);
+        piston.stage.layers[1].renderByTile = false;
 
         var map = new PistonTiledMap('test2.json');
         map.parseTiled(function(data) {
-            /*for(var i = 0; i < data.length; i++)
-            {
-                var tile = new PistonEntity(data[i].pos, data[i].size, data[i].imageName);
-                tile.scrollable = true;
-                tile.clickable = true;
-                piston.stage.addChild(tile, data[i].layer);
-            }*/
             for(var i = 0; i < data.layers.length; i++)
             {
                 piston.stage.addChildren(data.layers[i], i, data.width, data.height);
@@ -204,12 +198,12 @@ var Madness = Class.create({
         {
             jQuery('#char_frame_outer_ring').data('easyPieChart').update(Math.floor(Math.random() * 100));
             jQuery('#char_frame_inner_ring').data('easyPieChart').update(Math.floor(Math.random() * 100));
-            console.log(JSON.stringify(piston.stage.layers[0].size));
-            
+            //console.log(JSON.stringify(piston.stage.layers[0].size));
+            piston.stage.layers[0].layerEntities[0][5].visible = false;
         }
         piston.stage.update();
-        $('totalent').update('T: ' + piston.renderer.entityInfo.total);
-        $('drawnent').update('D: ' + piston.renderer.entityInfo.drawn);
+        $('totalent').update('T: ' + piston.core.totalEntities);
+        $('drawnent').update('D: ' + piston.core.totalDrawnEntities);
         //jQuery('#stagexy').html('[' + piston.stage.entities[0].pos.y + '] [ x: ' + piston.stage.stagePos.x + ', y: ' + piston.stage.stagePos.y + ' ]');
     },
     resize: function()
