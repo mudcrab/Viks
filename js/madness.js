@@ -93,12 +93,12 @@ var Madness = Class.create({
         Event.observe(window, 'resize', function() { that.resize(); });
     },
     loadEntities: function(tilesW, tilesH) {
-        piston.stage.addLayer(0, 32);
+        piston.stage.addLayer(0, { w: 90, h: 45});
         piston.stage.addLayer(1, 32);
         piston.stage.layers[1].renderByTile = false;
 
-        var map = new PistonTiledMap('test2.json');
-        map.parseTiled(function(data) {
+        var map = new PistonTiledMap('iso_map_2.json');
+        map.parseTiled('isometric', function(data) {
             for(var i = 0; i < data.layers.length; i++)
             {
                 piston.stage.addChildren(data.layers[i], i, data.width, data.height);

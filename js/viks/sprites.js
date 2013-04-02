@@ -1,6 +1,20 @@
 window.toLoad = [
             {
                 type: 'spritemap',
+                file: 'green_tile_1_1',
+                instanceName: 'blueprints',
+                sprites: [
+                    {
+                        x: 0,
+                        y: 0,
+                        w: 90,
+                        h: 45,
+                        instanceName: 'green_tile'
+                    }
+                ]
+            },
+            {
+                type: 'spritemap',
                 file: 'sprites',
                 instanceName: 'main',
                 sprites: [
