@@ -154,7 +154,7 @@ var Madness = Class.create({
             else
             {
                 this.player.move(0, -2);
-                piston.stage.move(0, 1);
+                piston.stage.move(0, 3);
             }
         }
         if(this.input.keyDown('s'))
@@ -167,7 +167,7 @@ var Madness = Class.create({
             {
                 
                 this.player.move(0, 2);
-                piston.stage.move(0, -1);
+                piston.stage.move(0, -3);
             }
         }
         if(this.input.keyDown('a'))
@@ -179,7 +179,7 @@ var Madness = Class.create({
             else
             {
                 this.player.move(-2, 0);
-                piston.stage.move(1, 0);
+                piston.stage.move(3, 0);
             }
         }
         if(this.input.keyDown('d'))
@@ -191,7 +191,7 @@ var Madness = Class.create({
             else
             {
                 this.player.move(2, 0);
-                piston.stage.move(-1, 0);
+                piston.stage.move(-3, 0);
             }
         }
         if(this.input.keyUp('space'))
@@ -199,7 +199,10 @@ var Madness = Class.create({
             jQuery('#char_frame_outer_ring').data('easyPieChart').update(Math.floor(Math.random() * 100));
             jQuery('#char_frame_inner_ring').data('easyPieChart').update(Math.floor(Math.random() * 100));
             //console.log(JSON.stringify(piston.stage.layers[0].size));
-            piston.stage.layers[0].layerEntities[0][5].visible = false;
+            //piston.stage.layers[0].layerEntities[0][5].visible = false;
+            var percent = Math.floor(Math.random() * 64);
+            //jQuery('#level_progress').css('margin-top', 64 - percent + 'px');
+            //jQuery('#level_progress').height(64 - percent);
         }
         piston.stage.update();
         $('totalent').update('T: ' + piston.core.totalEntities);
