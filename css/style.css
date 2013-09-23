@@ -1,11 +1,15 @@
 /* =============================================================================
    HTML5 Boilerplate CSS: h5bp.com/css
    ========================================================================== */
+
 html, body {
   overflow: hidden;
   height: 100%;
   width: 100%;
   margin: 0;
+}
+body {
+  font-family: "Open Sans";
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
 audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
@@ -78,6 +82,54 @@ td { vertical-align: top; }
 /* ===== Primary Styles ========================================================
    Author:
    ========================================================================== */
+#gameDisplay, #canvases {
+  width: 100%;
+  height: 100%;
+}
+#details {
+  display: none;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 3px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  min-width: 200px;
+  font-family: "Open Sans";
+  z-index: 100000;
+}
+#game-ui {
+  position: fixed;
+  top: 20px;
+  left: 30px;
+}
+.debug_text {
+  font-weight: 900;
+}
+#fps, #version, #ents { 
+  position: fixed; 
+  /*color: rgba(255, 255, 255, 0.7);*/
+  color: #fff;
+  text-shadow: 0px 1px 3px rgba(85, 85, 85, 0.7);
+  z-index: 100000;
+}
+#fps {
+  font-size: 24pt;
+  font-weight: 700;
+  top: 20px;
+  right: 20px;
+  
+}
+#version {
+  bottom: 20px;
+  left: 20px;
+}
+#ents {
+  bottom: 20px;
+  right: 20px;
+}
 #cr-stage { border:1px solid black; color:white }
 #charui {
   width:  520px;
@@ -144,49 +196,202 @@ td { vertical-align: top; }
   margin-left: -200px;
   z-index: 9001;
 }
+
 #actionbuttons {
-  width: 440px;
-  z-index: 9001;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  height: 50px;
 }
 .ab {
+  background: url('../assets/ab_frame.png');
   width: 40px;
   height: 40px;
   float: left;
-  /*border-radius: 3px;*/
-  border: 1px solid #464646;
-  background: #959595;
-  border-right: none;
+  margin-right: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
-.ab_inner {
+.ab_content {
+  width: 32px;
   height: 32px;
-  /*border-radius: 2px;*/
-  background: #b7b7b7;
-  border: 1px solid #ccc;
+  background: rgba(0, 0, 0, 0.7);
+  margin: 4px;
 }
-.ab_inner:hover {
-  height: 35px;
-}
-.radius_left {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
-.radius_right {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-.radius_left_s {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
-.radius_right_s {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-.border_right_ab {
-  border-right: 1px solid #464646;
+.ab_content:hover {
+  background: rgba(0, 0, 0, 0.9);
 }
 
+#debugWindow {
+    display: none;
+    width: 400px;
+    height: 500px;
+    position: fixed;
+    z-index: 1000000;
+    top: 50px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 3px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+}
+#debugContent {
+    margin: 10px;
+    color: #fff;
+    text-align: left;
+    height: 480px;
+    overflow: auto;
+}
+#debugContent pre {
+    margin: 0;
+    font-family: "Source Code Pro Semibold";
+    font-size: 8pt;
+}
+.button {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  padding: 10px;
+  background: rgba(243, 243, 243, 0.8);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  font-family: "Segoe UI";
+  cursor: pointer;
+}
+.button:active {
+  background: rgba(237, 237, 237, 0.8);
+}
+#charFrame {
+  float: left;
+  padding: 1px;
+  -webkit-transform: rotate(45deg);
+  border: 1px solid #d8b175;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+}
+#charFrameContent {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #2b2b2b;
+  outline: 1px solid #67553b;
+  width: 60px;
+  height: 60px;
+}
+#leftFrame {
+  float: left;
+  margin-top: -6px;
+  display: none;
+}
+#fTopL {
+  -webkit-transform: skew(-45deg);
+  border: 1px solid #d8b175;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+  padding: 1px;
+}
+#fBottomL {
+  margin-top: 10px;
+ border: 1px solid #d8b175;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+  -webkit-transform: skew(45deg);
+  padding: 1px;
+}
+#rightFrame {
+  margin-top: -4px;
+  float: left;
+  margin-left: 10px; 
+}
+#fTopR {
+  padding: 1px;
+  margin-top: 10px;
+  border: 1px solid #d8b175;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+  -webkit-transform: skew(45deg);
+}
+#fBottomR {
+  padding: 1px;
+  margin-top: 10px;
+  border: 1px solid #d8b175;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7);
+  -webkit-transform: skew(-45deg);
+}
+#fTopLC, #fBottomLC, #fTopRC, #fBottomRC {
+  border: 1px solid #2b2b2b;
+  outline: 1px solid #67553b;
+}
+#fTopLC, #fBottomLC {
+  height: 20px;
+  width: 60px;
+}
+#fTopRC, #fBottomRC {
+  height: 15px;
+  width: 200px;
+}
+#fTopLC {
+  background: rgba(242, 101, 34, 0.7);
+}
+#fBottomLC {
+  background: rgba(236, 0, 140, 0.7);
+}
+#fTopRC {
+  background: rgba(247, 18, 27, 0.7);
+}
+#fBottomRC {
+  background: rgba(0, 191, 243, 0.7); 
+}
 
+#char_frame_ui {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  border-radius: 45px;
+  width: 73px;
+  height: 73px;
+}
+#char_frame_outer_ring {
+  position: absolute;
+  width: 69px;
+  height: 69px;
+}
+#char_frame_inner_ring {
+  position: absolute;
+  width: 67px;
+  height: 67px;
+  margin-left: 3px;
+  margin-top: 3px;
+}
+#char_frame {
+  width: 64px;
+  height: 64px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 45px;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.7);
+  margin-left: 4px;
+  margin-top: 5px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.8);
+  border: 1px solid #000;
+}
+#level_progress {
+  width: 64px;
+  height: 1px;
+  background: rgba(109, 207, 246, 0.5);
+  border-radius: 45px;
+}
+#level_text {
+  color: #fff;
+  width: 64px;
+  text-align: center;
+  padding-top: 15px;
+  font-size: 18pt;
+  font-family: "Metamorphous";
+}
+
+.easyPieChart {
+    position: relative;
+    text-align: center;
+}
+
+.easyPieChart canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 
 .clear {
