@@ -1,0 +1,93 @@
+{ "height":10,
+ "layers":[
+        {
+         "data":[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 1, 1, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 1, 1, 2, 2, 3, 3, 2, 2, 1, 2, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 1, 1, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+         "height":10,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":10,
+         "name":"Tile Layer 2",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "height":10,
+         "name":"Object Layer 1",
+         "objects":[
+                {
+                 "height":0,
+                 "name":"obstacle",
+                 "properties":
+                    {
+                     "instanceName":"obstacle"
+                    },
+                 "type":"solid",
+                 "visible":true,
+                 "width":0,
+                 "x":13,
+                 "y":44
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }],
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "tileheight":32,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "image":"sprites.png",
+         "imageheight":160,
+         "imagewidth":160,
+         "margin":0,
+         "name":"sprites",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tileproperties":
+            {
+             "0":
+                {
+                 "instanceName":"grass1"
+                },
+             "1":
+                {
+                 "instanceName":"grass2"
+                },
+             "2":
+                {
+                 "instanceName":"grass3"
+                },
+             "3":
+                {
+                 "instanceName":"plr"
+                }
+            },
+         "tilewidth":32
+        }],
+ "tilewidth":32,
+ "version":1,
+ "width":10
+}

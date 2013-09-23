@@ -1,94 +1,155 @@
-var Madness = Class.create({
-    //assets/ui/frame.png
-    spr : null,
-    x : 10,
-    y : 10,
-    stage: null,
-    player: null,
-    mouseX: null,
-    mouseY: null,
-    stageX: null,
-    stageY: null,
-    player: null,
-    input: null,
-    
-    initialize: function()
-    {
-        this.input = new PistonInput();
-    },
-    setup: function(stage)
-    {
-        this.stage = stage;
-        this.stage.setSize(jQuery(window).width(), jQuery(window).height(), 32, 32, jQuery(window).width(), jQuery(window).height());
-        var pos = 0;
-        for(var x = 0; x < Math.floor(jQuery(window).width() / 32) + 1; x++)
-        {
-            for(var y = 0; y < Math.floor(jQuery(window).height() / 32) + 1; y++)
-            {
-                this.stage.addChild(new PistonEntity(x * 32, y * 32, 32, 32, 'grass1', 'grass' + pos));
-                pos++;
-            }
-        }
-        this.player = new PistonEntity(300, 300, 32, 32, 'player', 'player character');
-        this.player.properties.xspeed = 3;
-        this.player.properties.yspeed = 3;
-        this.player.scrollable = false;
-        this.player.clickable = true;
-        this.stage.addChild(this.player);
-        this.stage.addCamera(this.player);
-    },
-    update : function()
-    {
-        if(fps < 30)
-        {
-            jQuery('#fps').css('color', '#f55b5b');
-        }
-        else if(fps < 45)
-        {
-            jQuery('#fps').css('color', '#f9ee2a');
-        }
-        else
-        {
-            jQuery('#fps').css('color', '#fff');
-        }
-        jQuery('#fps').html(engine.fps());
-        jQuery('#totalent').html(this.stage.totalEntities);
-        jQuery('#drawnent').html(this.stage.drawnEntities);
-        var leftClick = this.input.leftMouseClick();
-        if(leftClick.clicked)
-        {
-            this.mouseX = leftClick.x;
-            this.mouseY = leftClick.y;
-            var clicker = this.stage.isClicked(this.mouseX, this.mouseY);
-            if(clicker !== undefined)
-            {
-                /*if(clicker.visible)
-                    clicker.visible = false;
-                else
-                    clicker.visible = true;*/
+var Madness = function() {
+	this.player = null;
+	this.stage = null;
+	this.input = null;
+	this.camera = null;
+	this.entityCameraOffset = {};
+	this.toLoad = null;
+	this.loader = null;
+	this.initialize();
+};
+Madness.prototype.initialize = function()
+{
+	this.toLoad = toLoad;
+},
+Madness.prototype.setup = function()
+{
+	var tilesW = 40;
+	var tilesH = 30;
+	var tileSize = {
+		w: 32,
+		h: 32
+	};
+	var stageSize = {
+		stageWidth: tilesW,
+		stageHeight: tilesH,
+		screenWidth: $('body').width(),
+		screenHeight: $('body').height(),
+		pxWidth: tilesW * tileSize.w,
+		pxHeight: tilesH * tileSize.h
+	};
+	piston.stage = new PistonStage({x: 0, y: 0}, stageSize);
+	this.input = new PistonInput();
+	this.loadEntities(tilesW, tilesH);
 
-            }
-        }
-        if(this.input.keyDown('w'))
-        {
-            this.player.move(0, -this.player.properties.yspeed);
-        }
-        if(this.input.keyDown('s'))
-        {
-            this.player.move(0, this.player.properties.yspeed);
-        }
-        if(this.input.keyDown('a'))
-        {
-            this.player.move(-this.player.properties.xspeed, 0);
-        }
-        if(this.input.keyDown('d'))
-        {
-            this.player.move(this.player.properties.xspeed, 0);
-        }
-    },
-    draw: function()
-    {
-        
-    }
-});
-var engine = new PistonEngine('gameDisplay', jQuery(window).width(), jQuery(window).height(), Madness, 'c2d', 8);
+	this.input.addMouseHandler('click', 'button');
+	this.input.addMouseHandler('mouseup', 'gameDisplay');  
+
+	piston.stage.setup();
+
+	var that = this;
+
+		//Event.observe(window, 'resize', function() { that.resize(); });
+};
+Madness.prototype.loadEntities = function(tilesW, tilesH) {
+	piston.stage.addLayer(0, { w: 90, h: 45});
+	piston.stage.addLayer(1, 32);
+	piston.stage.layers[1].renderByTile = false;
+
+	var map = new PistonTiledMap('iso_map_2.json');
+	map.parseTiled('isometric', function(data) {
+		for(var i = 0; i < data.layers.length; i++)
+		{
+			piston.stage.addChildren(data.layers[i], i, data.width, data.height);
+		}
+		piston.stage.setup();
+	});
+
+	var pData = {
+		pos: {
+			x: Math.floor($('#gameDisplay').width() / 2 - 16),
+			y: Math.floor($('#gameDisplay').height() / 2 - 16)
+		},
+		size: {
+			w: 128,
+			h: 128
+		},
+		image: 'c_down_0',
+		name: 'Player 1'
+	};
+
+	this.player = new Player(pData.pos, pData.size, pData.image, pData.name);
+	this.player.scrollable = true;
+	this.player.manual = true;
+	piston.stage.addChild(this.player, 1);
+};
+Madness.prototype.draw = function()
+{
+
+};
+Madness.prototype.update = function()
+{
+	if(this.input.leftMouseClick('button'))
+	{
+		Debug.toggle();
+	}
+	if(this.input.leftMouseUp('gameDisplay'))
+	{
+		console.log(piston.stage.getClickedEntity(this.input.mouseXY.x, this.input.mouseXY.y));
+	}
+	var charX, charY, stageX, stageY;
+
+	$('#fps').text(piston.core.fps);
+
+	if(this.input.keyDown('w'))
+	{
+		if(this.player.pos.y <= 0)
+		{
+			this.player.move(0, 0);
+		}
+		else
+		{
+			this.player.move(0, -2);
+			piston.stage.move(0, 3);
+		}
+	}
+	if(this.input.keyDown('s'))
+	{
+		if(this.player.pos.y + 32 >= piston.stage.stageSize.screenHeight)
+		{
+			this.player.move(0, 0);
+		}
+		else
+		{
+
+			this.player.move(0, 2);
+			piston.stage.move(0, -3);
+		}
+	}
+	if(this.input.keyDown('a'))
+	{
+		if(this.player.pos.x <= 0)
+		{
+			this.player.move(0, 0);
+		}
+		else
+		{
+			this.player.move(-2, 0);
+			piston.stage.move(3, 0);
+		}
+	}
+	if(this.input.keyDown('d'))
+	{
+		if(this.player.pos.x + 32 >= piston.stage.stageSize.screenWidth)
+		{
+			this.player.move(0, 0);
+		}
+		else
+		{
+			this.player.move(2, 0);
+			piston.stage.move(-3, 0);
+		}
+	}
+	if(this.input.keyUp('space'))
+	{
+
+	}
+	piston.stage.update();
+	$('#totalent').text('T: ' + piston.core.totalEntities);
+	$('#drawnent').text('D: ' + piston.core.totalDrawnEntities);
+};
+Madness.prototype.resize = function()
+{
+
+};
+piston.core = new PistonEngine('#gameDisplay', Madness);
