@@ -1,27 +1,30 @@
-var Player = Class.create(PistonEntity, {
+var Player = function(pos_, size_, image_, name_) {
 
-	animationUp: {
+	this.animationUp = {
 		currentFrame: 0,
 		maxFrames: 9,
 		frames: [ 'c_up_0', 'c_up_1', 'c_up_2', 'c_up_3', 'c_up_4', 'c_up_5', 'c_up_6', 'c_up_7', 'c_up_8' ]
-	},
-	animationDown: {
+	};
+	this.animationDown = {
 		currentFrame: 0,
 		maxFrames: 9,
 		frames: [ 'c_down_0', 'c_down_1', 'c_down_2', 'c_down_3', 'c_down_4', 'c_down_5', 'c_down_6', 'c_down_7', 'c_down_8' ]
-	},
-	animationLeft: {
+	};
+	this.animationLeft = {
 		currentFrame: 0,
 		maxFrames: 9,
 		frames: [ 'c_left_0', 'c_left_1', 'c_left_2', 'c_left_3', 'c_left_4', 'c_left_5', 'c_left_6', 'c_left_7', 'c_left_8' ]
-	},
-	animationRight: {
+	};
+	this.animationRight = {
 		currentFrame: 0,
 		maxFrames: 9,
 		frames: [ 'c_right_0', 'c_right_1', 'c_right_2', 'c_right_3', 'c_right_4', 'c_right_5', 'c_right_6', 'c_right_7', 'c_right_8' ]
-	},
-
-	move: function(x, y)
+	};
+	PistonEntity.call(this, pos_, size_, image_, name_);
+};
+Player.prototype = Object.create(PistonEntity.prototype);
+Player.prototype.constructor = PistonEntity;
+	Player.prototype.move = function(x, y)
 	{
 		var self = this;
 		this.pos.lastx = this.pos.x;
@@ -81,9 +84,8 @@ var Player = Class.create(PistonEntity, {
 				self.image = self.animationUp.frames[0];
 			}
 		}	
-	},
-	update: function()
+	};
+	Player.prototype.update = function()
 	{
 		
 	}
-});

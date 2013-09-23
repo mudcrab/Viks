@@ -1,23 +1,24 @@
-var Madness = Class.create({
+var Madness = function() {
     //assets/ui/frame.png
-    spr : null,
-    x : 10,
-    y : 10,
-    stage: null,
-    player: null,
-    mouseX: null,
-    mouseY: null,
-    stageX: null,
-    stageY: null,
+    this.spr = null;
+    this.x = 10;
+    this.y = 10;
+    this.stage = null;
+    this.player = null;
+    this.mouseX = null;
+    this.mouseY = null;
+    this.stageX = null;
+    this.stageY = null;
+};
     
-    initialize: function()
+    Madness.prototype.initialize = function()
     {
         //spr = new Sprite('assets/tiles/player.png', 10, 10);
         var asd = new Array();
         //spr.setPosition(10, 10);
         //var ent = new Entity(10, 10);
-    },
-    setup: function(stage)
+    };
+    Madness.prototype.setup = function(stage)
     {
         this.stage = stage;
         this.stage.boundingBox = {
@@ -47,8 +48,8 @@ var Madness = Class.create({
         this.stage.addCamera(this.player);
         this.stage.addChild(charFrame);
         //this.stage.addChild(new Entity('player.png'), 100, 100, false, 'playerChar');
-    },
-    update : function()
+    };
+    Madness.prototype.update = function()
     {
         var fps = engine.fps();
         if(fps < 30)
@@ -118,8 +119,8 @@ var Madness = Class.create({
             jQuery('#mousexy').html(this.mouseX + ' x ' + this.mouseY);
             jQuery('#stagexy').html(this.stageX + ' x ' + this.stageY);
         }
-    },
-    draw: function()
+    };
+    Madness.prototype.draw = function()
     {
         /*for(var x = 0; x < 20; x++)
         {
@@ -131,5 +132,4 @@ var Madness = Class.create({
         //spr.render();
         this.stage.render();
     }
-});
 var engine = new PistonEngine('gameDisplay', jQuery(window).width(), jQuery(window).height(), Madness);
