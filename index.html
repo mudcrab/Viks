@@ -14,69 +14,20 @@
 	<meta name="viewport" content="width=device-width">
 
 	<link rel="stylesheet" href="css/style.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Boogaloo|Metamorphous' rel='stylesheet' type='text/css'>
 	<script src="js/libs/modernizr-2.5.3.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<!-- <script type="text/javascript" src="js/libs/prototype.js"></script>
-	<script type="text/javascript" src="js/libs/jquery.easy-pie-chart.js"></script> -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	
 </head>
 <body>
-	<div id="char_frame_ui">
-		<div id="char_frame_outer_ring" data-percent="100"></div>
-		<div id="char_frame_inner_ring" data-percent="100"></div>
-		<div id="char_frame">
-			<div id="level_text">12</div>
-		</div>
-	</div>
-	<div id="button" class="button">Le buttón</div>
-	<div id="actionbuttons">
-		<div class="ab">
-			<div class="ab_content"></div>
-		</div>
-		<div class="ab">
-			<div class="ab_content"></div>
-		</div>
-		<div class="ab">
-			<div class="ab_content"></div>
-		</div>
-		<div class="ab">
-			<div class="ab_content"></div>
-		</div>
-		<div class="ab">
-			<div class="ab_content"></div>
-		</div>
-		<div class="ab">
-			<div class="ab_content"></div>
-		</div>
-		<div class="ab">
-			<div class="ab_content"></div>
-		</div>
-		<div class="ab">
-			<div class="ab_content"></div>
-		</div>
-		<div class="ab">
-			<div class="ab_content"></div>
-		</div>
-		<div class="ab">
-			<div class="ab_content"></div>
-		</div>
-		
-		<div class="clear"></div>
-	</div>
 	<div id="fps"></div>
-	<div class="debug_text" id="version"></div>
 	<div id="ents">
 		<div class="debug_text" id="totalent"></div>
 		<div class="debug_text" id="drawnent"></div>
 	</div>
-	<div id="canvases">
-		<canvas id="gameDisplay"></canvas>
-		
-	</div>
+	<canvas id="canvas"></canvas>
 	<script src="js/utils.js"></script>
 	<script src="js/piston/core.js"></script>
+	<script src="js/piston/utils.js"></script>
 	<script src="js/piston/renderer.js"></script>
 	<script src="js/piston/entity.js"></script>
 	<script src="js/piston/stage.js"></script>
@@ -86,9 +37,15 @@
 	<script src="js/piston/loader.js"></script>
 	<script src="js/piston/map.js"></script>
 	<script src="js/piston/tiledmap.js"></script>
-	<!-- <script src="js/piston/debug.js"></script> -->
+	<!-- <script src="js/piston/debug.js"></script>
 	<script src="js/viks/sprites.js"></script>
 	<script src="js/viks/player.js"></script>
-	<script src="js/madness.js"></script>
+	<script src="js/madness.js"></script> -->
+	<script src="js/piston/debug.js"></script>
+	<script src="js/viks/sprites.js"></script>
+	<script src="js/viks/player.js"></script>
+	<script src="js/viks/teststage.js"></script>
+	<script src="js/class.js"></script>
+	<script src="js/viks/viks.js"></script>
 </body>
 </html>

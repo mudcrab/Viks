@@ -24,7 +24,7 @@ var Player = function(pos_, size_, image_, name_) {
 };
 Player.prototype = Object.create(PistonEntity.prototype);
 Player.prototype.constructor = PistonEntity;
-	Player.prototype.move = function(x, y)
+	/*Player.prototype.move = function(x, y)
 	{
 		var self = this;
 		this.pos.lastx = this.pos.x;
@@ -83,8 +83,8 @@ Player.prototype.constructor = PistonEntity;
 				self.animationUp.currentFrame = 0;
 				self.image = self.animationUp.frames[0];
 			}
-		}	
-	};
+		}
+	};*/	
 	Player.prototype.update = function()
 	{
 		
