@@ -19,9 +19,10 @@ Viks.prototype.onLoadComplete = function()
 	piston.core = new PistonEngine(800, 600, 'canvas');
 	piston.core.toggleFPS(true);
 	piston.core.addStage(new TestStage('asd'));
-	that.player = new PistonEntity({ x: 100, y: 100, lastx: 100, lasty: 100 }, { w: 128, h: 128 }, 'test');
-	that.player.image = 'c_down_0';
+
+	/*that.player = new PistonEntity({ x: 10, y: 10, lastx: 10, lasty: 10 }, { w: 32, h: 32 }, 'test');
+	that.player.image = 'plr1';
 	that.player.scrollable = true;
-	piston.core.getStage().addEntity(that.player);
+	piston.core.getStage().addEntity(that.player);*/
 };
 var Game = new Viks();
