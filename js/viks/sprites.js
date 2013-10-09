@@ -15,6 +15,11 @@ window.toLoad =
 		]
 	},
 	{
+		type: 'image',
+		file: 'bunny',
+		instanceName: 'bunny'
+	},
+	{
 		type: 'spritemap',
 		file: 'sprites',
 		instanceName: 'main',
